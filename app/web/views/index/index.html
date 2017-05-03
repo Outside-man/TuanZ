@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script type="text/javascript" src="<?php echo _STATIC_; ?>js/jquery.js"></script>
+</head>
+<body>
+    <h1>登录</h1>
+    <form action="/index/login" method="post">
+        <p>UserName</p><input id="username" type="text" name="username">
+        <p>Password</p><input id="password" type="password" name="password"><br>
+        <input type="submit">
+        <button type="button"  id="login-btn">登录</button>
+    </form>
+    <h1>注册</h1>
+    <form action="/index/login" method="post">
+        <p>UserName</p><input id="reg_username" type="text">
+        <p>Password</p><input id="reg_password" type="password"><br>
+        <button type="button"  id="register-btn">注册</button>
+    </form>
+    <h1>发送邮件</h1>
+    <form action="/index/login" method="post">
+        <p>toMail</p><input id="tomail" type="text">
+        <p>Title</p><input id="title" type="text"><br>
+        <p>Content</p><input id="content" type="text"><br>
+        <button type="button"  id="send-btn">发送</button>
+    </form>
+    <a href="/index/login">用户中心</a>
+<script>
+    $("#send-btn").click(function () {
+        var tomail = $("#tomail").val();
+        var title = $("#title").val();
+        var content = $("#content").val();
+        if(tomail!=""&&content!=""){
+            var data={
+                "tomail":tomail,
+                "title":title,
+                "content":content
+            };
+            $.ajax({
+                type: "POST",
+                url: "/index/mail",
+                data: data,
+                dataType:"json",
+                success: function(data){
+                    if(data.status==0){
+                        alert(data.info);
+                    }
+                    else {
+                        alert('wrong');
+                    }
+                },
+                error: function(data){
+                    alert('Error');
+                }
+            });
+        }
+        else{
+            alert("用户名密码不能为空");
+        }
+    }) ;
+    $("#login-btn").click(function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        if(username!=""&&password!=""){
+            var data={
+                "username":username,
+                "password":password
+            };
+            $.ajax({
+                type: "POST",
+                url: "/index/login",
+                data: data,
+                dataType:"json",
+                success: function(data){
+                    if(data.status==0){
+                        $(location).attr('href',"/index/login");
+                        alert(data.info);
+                    }
+                    else {
+                        alert('wrong');
+                    }
+                },
+                error: function(data){
+                    alert('Error');
+                }
+            });
+        }
+        else{
+            alert("用户名密码不能为空");
+        }
+    }) ;
+    $("#register-btn").click(function () {
+        var username = $("#reg_username").val();
+        var password = $("#reg_password").val();
+        if(username!=""&&password!=""){
+            var data={
+                "username":username,
+                "password":password
+            };
+            $.ajax({
+                type: "POST",
+                url: "/user/register",
+                data: data,
+                dataType:"json",
+                success: function(data){
+                    if(data.status==0){
+                        //$(location).attr('href',"/index/login");
+                        alert(data.info);
+                    }
+                    if(data.status==1){
+                        alert(data.info);
+                    }
+                },
+                error: function(data){
+                    alert('Error');
+                }
+            });
+        }
+        else{
+            alert("用户名密码不能为空");
+        }
+    }) ;
+</script>
+</body>
+</html>

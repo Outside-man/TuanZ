@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mail-config>
+    <CharSet>    </CharSet>
+    <!--SMTP服务器-->
+    <Host>    </Host>
+    <!--SMTP服务器端口-->
+    <Port>    </Port>
+    <!--主机邮箱-->
+    <Username>    </Username>
+    <!--主机授权码-->
+    <Password>    </Password>
+    <!--回复邮箱-->
+    <AddReplyToMail>    </AddReplyToMail>
+    <!--回复人-->
+    <AddReplyToName>    </AddReplyToName>
+    <!--发件邮箱-->
+    <From>    </From>
+    <!--发件人-->
+    <FromName>    </FromName>
+    <!--每行上限-->
+    <WordWrap>    </WordWrap>
+</mail-config>

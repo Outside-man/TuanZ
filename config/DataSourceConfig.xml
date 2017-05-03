@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mysql-config>
+    <!--mysql服务器地址-->
+    <host>    </host>
+    <!--数据库地址-->
+    <dbname>    </dbname>
+    <!--数据库用户名-->
+    <username>    </username>
+    <!--数据密码-->
+    <password>    </password>
+</mysql-config>
