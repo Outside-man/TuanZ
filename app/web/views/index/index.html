@@ -10,7 +10,6 @@
     <form action="/index/login" method="post">
         <p>UserName</p><input id="username" type="text" name="username">
         <p>Password</p><input id="password" type="password" name="password"><br>
-        <input type="submit">
         <button type="button"  id="login-btn">登录</button>
     </form>
     <h1>注册</h1>
@@ -26,8 +25,30 @@
         <p>Content</p><input id="content" type="text"><br>
         <button type="button"  id="send-btn">发送</button>
     </form>
-    <a href="/index/login">用户中心</a>
+    <h1>文件上传/下载</h1>
+    <form action="/file/index"  id="send_file" method="post">
+        <p>上传</p><input id="file" name="file" type="file">
+        <button type="button"  id="send-file">发送</button>
+        <button type="button"  id="down-file">下载</button>
+    </form>
 <script>
+    $("#down-file").click(function () {
+        var data={
+            "path":"img.jpg",
+            "file":"hello_world.jpg"
+        };
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: "/file/download",
+            data:data,
+            async:false,
+            success: function(){
+                alert("hah");
+                window.open('/file/download');
+            }
+        });
+    }) ;
     $("#send-btn").click(function () {
         var tomail = $("#tomail").val();
         var title = $("#title").val();
@@ -59,6 +80,29 @@
         else{
             alert("用户名密码不能为空");
         }
+    }) ;
+    $("#send-file").click(function () {
+        var data = new FormData($( "#send_file" )[0]);
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "/file/upload",
+                data: data,
+                dataType:"json",
+                contentType: false,
+                processData: false,
+                success: function(data){
+                    if(data.status==0){
+                        alert(data.info);
+                    }
+                    else {
+                        alert('wrong');
+                    }
+                },
+                error: function(data){
+                    alert('Error');
+                }
+            });
     }) ;
     $("#login-btn").click(function () {
         var username = $("#username").val();

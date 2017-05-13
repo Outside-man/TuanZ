@@ -17,6 +17,7 @@ define('_STATIC_', '/'.WEB.'static/');
 define('CONTROLLER', PHP.'controllers/');
 define('DAO', PHP.'dao/');
 define('SERVICE', PHP.'service/');
+define('FILE', TuanZ.'file/');
 define('DEBUG', true);
 
 //开启DEBUG
