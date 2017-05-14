@@ -16,10 +16,24 @@ class FileService{
         self::$fileDao = new \app\php\dao\FileDao();
     }
     public function uploadFile($tmp_file, $target_path, $file_name){
-        if(self::$fileDao->insert($file_name, time().mt_rand(),$target_path)&&self::$fileManage->upload($tmp_file, FILE.$target_path, $file_name))return true;
+        $afterName = time().mt_rand();
+        if(self::$fileDao->insert($file_name, $afterName,$target_path)&&self::$fileManage->upload_file($tmp_file, FILE.$target_path, $afterName))return true;
         else return false;
     }
-    public function downloadFile($path, $filename){
+    public function downloadFile($id){
+        $file = self::$fileDao->selectById($id);
+        return self::$fileManage->download_file(FILE.$file['folder'].$file['after_name'], $file['pre_name']);
+    }
+    public function deleteFile($id){
+        $file = self::$fileDao->selectById($id);
+        self::$fileDao->deleteById($id);
+        return self::$fileManage->delete_file(FILE.$file['folder'], $file['after_name']);
+    }
+    public function listCurrentFile($path){
+        return self::$fileManage->list_current_file(FILE.$path);
+    }
+    public function listAllFile($path){
+        return self::$fileManage->list_all_file($path);
     }
 
 }

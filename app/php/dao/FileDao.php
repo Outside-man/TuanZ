@@ -21,4 +21,10 @@ class FileDao extends \core\lib\BaseDao {
             ':folder' => $folder
         ));
     }
+    public function deleteById($id){
+        return $this->delete_one_by_one_condition('b_file', 'id', $id);
+    }
+    public function selectById($id){
+        return $this->select_one_by_one_condition('b_file', 'id', $id);
+    }
 }

@@ -26,15 +26,50 @@
         <button type="button"  id="send-btn">发送</button>
     </form>
     <h1>文件上传/下载</h1>
-    <form action="/file/index"  id="send_file" method="post">
+    <form action="/file/upload"  id="send_file" method="post">
         <p>上传</p><input id="file" name="file" type="file">
         <button type="button"  id="send-file">发送</button>
         <button type="button"  id="down-file">下载</button>
     </form>
+    <h1>文件下载</h1>
+    <form action="/file/download"   method="post">
+        <input value="29" name="id">
+        <input type="submit">
+    </form>
+    <h1>文件删除</h1>
+    <form action="/file/download"   method="post">
+        <input id="delId" value="29">
+        <button type="button"  id="del-file">删除</button>
+    </form>
+    <a href="/file/listFile"> lalal</a>
 <script>
+    $("#del-file").click(function () {
+        var del_id = $("#delId").val();
+        var data={
+            "id":del_id
+        };
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: "/file/delete",
+            data: data,
+            dataType:"json",
+            success: function(data){
+                if(data.status==0){
+                    alert(data.info);
+                }
+                else {
+                    alert('wrong');
+                }
+            },
+            error: function(data){
+                alert('Error');
+            }
+        });
+    }) ;
     $("#down-file").click(function () {
         var data={
-            "path":"img.jpg",
+            "path":"ii.jpeg",
             "file":"hello_world.jpg"
         };
         console.log(data);
@@ -43,9 +78,10 @@
             url: "/file/download",
             data:data,
             async:false,
-            success: function(){
+            success: function(r){
                 alert("hah");
-                window.open('/file/download');
+                //TODO 解决下载文件的ajax post问题
+                // window.open('/file/download');
             }
         });
     }) ;
