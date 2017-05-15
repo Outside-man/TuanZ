@@ -31,7 +31,7 @@ class fileController extends \core\lib\BaseController {
     }
     public function listFile(){
         $fileService = new \app\php\service\FileService();
-        out($fileService->listCurrentFile('test'));
+        out($fileService->listCurrentFile('test/'));
     }
 
 }

@@ -30,7 +30,13 @@ class FileService{
         return self::$fileManage->delete_file(FILE.$file['folder'], $file['after_name']);
     }
     public function listCurrentFile($path){
-        return self::$fileManage->list_current_file(FILE.$path);
+        $f = self::$fileManage->list_current_file(FILE.$path);
+        $files = array();
+        forEach($f as $key){
+            $k = self::$fileDao->selectByAfterNameByFolder($key, $path);
+            array_push($files, $k);
+        }
+        return $files;
     }
     public function listAllFile($path){
         return self::$fileManage->list_all_file($path);
