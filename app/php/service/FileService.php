@@ -34,7 +34,9 @@ class FileService{
         $files = array();
         forEach($f as $key){
             $k = self::$fileDao->selectByAfterNameByFolder($key, $path);
-            array_push($files, $k);
+            if($k!=null) {
+                array_push($files, $k);
+            }
         }
         return $files;
     }
